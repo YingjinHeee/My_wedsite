@@ -102,7 +102,7 @@ params:
         url: blogs/biden
       - image: pic06.jpg
         subtitle: Hypothesis and testing
-        title: Omega Group- Pay Discrimination verification
+        title: Omega Group- Pay Discrimination Verification
         url: blogs/omega
   two:
     buttonText: Get Started
