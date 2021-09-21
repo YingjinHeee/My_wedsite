@@ -68,8 +68,8 @@ params:
     links:
       - name: Home
         url: '#'
-      - name: Blogs
-        url: blogs
+      # - name: Blogs
+      #   url: blogs
       - name: Generic Blog
         url: blogs/magna
       # - name: Elements
