@@ -1,0 +1,113 @@
+baseURL: https://yingjinhe.netlify.app/
+languageCode: en-us
+title: Portfolio web for Yingjin He
+theme: forty
+googleAnalytics: ''
+disqusShortname: ''
+params:
+  banner:
+    buttonText: Get Started
+    subtitle: |-
+      Hello, here is Yingjin He and welcome to my page!
+    title: Yingjin He
+  blog: {}
+  contact:
+    address:
+      - city: London
+        country: UK
+        street: Regent's Park
+        title: Address
+    buttonClear: Clear
+    buttonSend: Send message
+    email:
+      - email: yhe.mam2022@london.edu
+        title: Email
+    enable: yes
+    phone:
+      - phone: (0) 7549068926
+        title: Phone
+  custom_css: []
+  custom_js: []
+  description: Your description
+  error404:
+    heading: Page couldn't be found
+    text: Please visit [this page](/)
+  favicon: favicon.ico
+  footer:
+    copyright: Company Name
+    enable: yes
+    quicklinks:
+      - alt: HTML5 UP
+        text: 'Design: '
+        url: https://www.html5up.net
+    social:
+      - icon: fa-twitter
+        label: Twitter
+        url: https://www.twitter.com
+      - icon: fa-facebook
+        label: Facebook
+        url: https://www.facebook.com/simon.he.3954
+      - icon: fa-instagram
+        label: Instagram
+        url: https://www.instagram.com/simon_bridegroom/
+      - icon: fa-github
+        label: GitHub
+        url: https://github.com/YingjinHeee
+      - icon: fa-linkedin
+        label: LinkedIn
+        url: https://www.linkedin.com/in/yingjin-simon-he-41aab1178
+  image: ''
+  name: Your name
+  navigation:
+    button1:
+      - name: Get Started
+        url: blogs
+    button2:
+      - name: Log In
+        url: '#'
+    links:
+      - name: Home
+        url: '#'
+      - name: Blogs
+        url: blogs
+      - name: Generic Blog
+        url: blogs/magna
+      - name: Elements
+        url: elements.html
+    menu: Menu
+    subtitle: By HTML5 Up
+    title: Forty
+  tiles:
+    enable: yes
+    showcase:
+      - image: pic01.jpg
+        subtitle: Where data, finance and strategy meet
+        title: Academic Background
+        url: blogs/aliquam
+      - image: pic02.jpg
+        subtitle: Data-driven decision-making
+        title: Professional Experience
+        url: blogs/magna
+      - image: pic03.jpg
+        subtitle: Big world outside the campus
+        title: Extracurricular Experience
+        url: blogs/tempus
+      - image: pic04.jpg
+        subtitle: Data analytics and visualization by R
+        title: IMDB Movie Analysis Project
+        url: blogs/ipsum
+      - image: pic05.jpg
+        subtitle: Refresh minds and network
+        title: Interets& hobby
+        url: blogs/ipsum
+      - image: pic06.jpg
+        subtitle: 25 funny things about me
+        title: Other information
+        url: blogs/ipsum
+  two:
+    buttonText: Get Started
+    enable: yes
+    subtitle: "Grow Business \n Anneal data related skills \n  
+    Innovate for entrenpreneurship \n Offer help to minor communities \n"
+    title: Yingjin's Goal
+    url: blogs
