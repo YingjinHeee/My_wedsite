@@ -1,0 +1,87 @@
+---
+categories:
+- ""
+- ""
+date: "2021-09-21"
+description: "Linear regresion and confident interval setup"
+draft: false
+image: pic10.jpg
+keywords: ""
+slug: ipsum
+title: Biden's Approval Margins
+---
+
+<script src="Biden's Approval Margins Analysis_files/header-attrs/header-attrs.js"></script>
+
+
+<p>I use Biden;s approval rate data on <a href="https://projects.fivethirtyeight.com/biden-approval-ratings">all polls that track the president’s approval</a> to explore its volatility and future trendency.</p>
+<p>Firstly, we read the data from the website.</p>
+<pre class="r"><code># Import approval polls data directly off fivethirtyeight website
+approval_polllist &lt;- read_csv(&#39;https://projects.fivethirtyeight.com/biden-approval-data/approval_polllist.csv&#39;) 
+
+glimpse(approval_polllist)</code></pre>
+<pre><code>## Rows: 1,597
+## Columns: 22
+## $ president           &lt;chr&gt; &quot;Joseph R. Biden Jr.&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Jos…
+## $ subgroup            &lt;chr&gt; &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;, &quot;All polls&quot;…
+## $ modeldate           &lt;chr&gt; &quot;9/21/2021&quot;, &quot;9/21/2021&quot;, &quot;9/21/2021&quot;, &quot;9/21/2021&quot;…
+## $ startdate           &lt;chr&gt; &quot;2/3/2021&quot;, &quot;2/4/2021&quot;, &quot;2/4/2021&quot;, &quot;2/5/2021&quot;, &quot;2…
+## $ enddate             &lt;chr&gt; &quot;2/7/2021&quot;, &quot;2/6/2021&quot;, &quot;2/8/2021&quot;, &quot;2/7/2021&quot;, &quot;2…
+## $ pollster            &lt;chr&gt; &quot;Rasmussen Reports/Pulse Opinion Research&quot;, &quot;RMG R…
+## $ grade               &lt;chr&gt; &quot;B&quot;, &quot;B-&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B&quot;, &quot;B+&quot;, &quot;B&quot;, &quot;B+&quot;, &quot;B…
+## $ samplesize          &lt;dbl&gt; 1500, 1200, 1500, 15000, 1986, 15000, 2508, 15000,…
+## $ population          &lt;chr&gt; &quot;lv&quot;, &quot;rv&quot;, &quot;lv&quot;, &quot;a&quot;, &quot;rv&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;a&quot;, &quot;…
+## $ weight              &lt;dbl&gt; 0.192, 0.881, 0.537, 0.265, 0.105, 0.239, 1.588, 0…
+## $ influence           &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+## $ approve             &lt;dbl&gt; 50.0, 60.0, 51.0, 55.0, 59.0, 55.0, 61.0, 55.0, 50…
+## $ disapprove          &lt;dbl&gt; 47.0, 32.0, 46.0, 33.0, 35.0, 33.0, 39.0, 33.0, 37…
+## $ adjusted_approve    &lt;dbl&gt; 52.5, 59.3, 53.5, 53.6, 57.6, 53.6, 62.3, 53.6, 51…
+## $ adjusted_disapprove &lt;dbl&gt; 41.0, 33.1, 40.0, 36.3, 38.3, 36.3, 39.3, 36.3, 37…
+## $ multiversions       &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+## $ tracking            &lt;lgl&gt; TRUE, NA, TRUE, TRUE, NA, TRUE, NA, TRUE, NA, TRUE…
+## $ url                 &lt;chr&gt; &quot;https://www.rasmussenreports.com/public_content/p…
+## $ poll_id             &lt;dbl&gt; 74349, 74354, 74352, 74372, 74351, 74370, 74357, 7…
+## $ question_id         &lt;dbl&gt; 139669, 139679, 139675, 139746, 139673, 139738, 13…
+## $ createddate         &lt;chr&gt; &quot;2/8/2021&quot;, &quot;2/9/2021&quot;, &quot;2/9/2021&quot;, &quot;2/11/2021&quot;, &quot;…
+## $ timestamp           &lt;chr&gt; &quot;09:36:08 21 Sep 2021&quot;, &quot;09:36:08 21 Sep 2021&quot;, &quot;0…</code></pre>
+<pre class="r"><code># Use `lubridate` to fix dates, as they are given as characters.</code></pre>
+<p>Secondly, we create the confidence interval for the weekly data of the approval rate, through calculating the standard error and using 95% confidence level.</p>
+<pre class="r"><code>approval_polllist$enddate&lt;-mdy(approval_polllist$enddate)
+
+approval_plot&lt;-approval_polllist%&gt;%
+  filter(subgroup==&quot;Voters&quot;)%&gt;% #limit the data to group &quot;Voters&quot; in order to recreate the graph
+  select(enddate,pollster,samplesize,weight,approve, disapprove)%&gt;%
+  mutate(week_poll=week(enddate),mg_approval=approve-disapprove) #obtain the week of the enddate, to plot it against average approval
+
+approval_biden&lt;-approval_plot%&gt;% 
+ group_by(week_poll)%&gt;%
+  summarise(margin_apr_mean=mean(mg_approval),
+            sd_margin=sd(mg_approval),
+            count_pollster=n(),
+            t_critical = qt(0.975,count_pollster-1), #calculate t critical, for 95% confidence (2.5% per side)
+            se_margin=sd_margin/sqrt(count_pollster),
+            lower_interval=margin_apr_mean-t_critical*se_margin,
+            higher_interval=margin_apr_mean+t_critical*se_margin, #calculate confidence interval
+            )</code></pre>
+<p>Finally, we use ggplot to draw its trendency and beautify it.</p>
+<pre class="r"><code>approval_plot1&lt;-ggplot(approval_biden,aes(x=week_poll))+
+  geom_line(aes(y=margin_apr_mean),color=&quot;red&quot;,size=0.5)+
+  geom_point(aes(y=margin_apr_mean),color=&quot;red&quot;,size=0.8)+
+  geom_smooth(aes(y=margin_apr_mean),se=FALSE,size=0.8)+
+  geom_line(aes(y=lower_interval),color=&quot;pink&quot;,size=0.3)+
+  geom_line(aes(y=higher_interval),color=&quot;pink&quot;,size=0.3)+
+  geom_ribbon(aes(ymin=higher_interval,ymax=lower_interval),fill=&quot;grey&quot;,alpha=0.3)+
+  geom_hline(yintercept =0,color=&quot;orange&quot;,size=1)+
+  
+  labs(x=&quot;Week of the year&quot;,y=&quot;Average approval margin (approval - disapproval)&quot;,
+       title = &quot;Estimating approval margin(approval - disapproval) for Biden&quot;,
+       subtitle = &quot;2021 weekly average of all polls&quot;)+
+  
+  theme_bw()+
+  theme(plot.background = element_rect(fill = NA , colour = &#39;grey&#39;,size=0.1))+
+  theme(panel.border = element_rect(colour = NA, fill=NA))+
+  ylim(-15,30)
+     
+approval_plot1</code></pre>
+<p><img src="Biden's Approval Margins Analysis_files/figure-html/biden_plot-1.png" width="1056" style="display: block; margin: auto;" /></p>
+<p><em>Interestingly, we find that the variance change of the width of intervals, eg. week 4 and week 25. The large confidence interval from week 4 very likely ascribes to the small sample of that week, while week 25 has a comparatively large sample size and hence a much smaller confidence interval.</em></p>

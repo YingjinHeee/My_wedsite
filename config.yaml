@@ -86,24 +86,24 @@ params:
         url: blogs/aliquam
       - image: pic02.jpg
         subtitle: Data-driven decision-making
-        title: Professional Experience
+        title: Professional Highlight
         url: blogs/magna
       - image: pic03.jpg
         subtitle: Big world outside the campus
-        title: Extracurricular Experience
+        title: 25 Funny Things About Me
         url: blogs/tempus
       - image: pic04.jpg
         subtitle: Data analytics and visualization by R
         title: IMDB Movie Analysis Project
         url: blogs/ipsum
       - image: pic05.jpg
-        subtitle: Refresh minds and network
-        title: Interets& hobby
-        url: blogs/ipsum
+        subtitle: Prediction and linear regression
+        title: Biden's Approval Margins Analysis
+        url: blogs/biden
       - image: pic06.jpg
-        subtitle: 25 funny things about me
-        title: Other information
-        url: blogs/ipsum
+        subtitle: Hypothesis and testing
+        title: Omega Group- Pay Discrimination verification
+        url: blogs/omega
   two:
     buttonText: Get Started
     enable: yes
