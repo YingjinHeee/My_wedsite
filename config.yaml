@@ -9,7 +9,7 @@ params:
     buttonText: Get Started
     subtitle: |-
       Here, where the strategy, data and technology meet
-    title: Hi, here is Yingjin He and welcome to my page!
+    title: Hi, I'm Yingjin He and welcome to my page!
   blog: {}
   contact:
     address:
@@ -89,7 +89,7 @@ params:
         title: Professional Highlight
         url: blogs/magna
       - image: pic03.jpg
-        subtitle: Big world outside the campus
+        subtitle: To get to more about me!
         title: 25 Funny Things About Me
         url: blogs/tempus
       - image: pic04.jpg
@@ -107,7 +107,6 @@ params:
   two:
     buttonText: Get Started
     enable: yes
-    subtitle: "Grow Business \n Anneal data related skills \n  
-    Innovate for entrenpreneurship \n Offer help to minor communities \n"
+    subtitle: Grow Business - Anneal data related skills - Innovate for entrenpreneurship - Offer help to minor communities
     title: Yingjin's Goal
     url: blogs
