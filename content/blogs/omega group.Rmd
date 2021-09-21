@@ -3,7 +3,7 @@ title: "Omega Group- Pay Discrimination Verification"
 date: '2021-09-21'
 description: Hypothesis and testing
 draft: no
-image: pic10.jpg
+image: pic11.jpg
 keywords: ''
 slug: omega
 categories:
