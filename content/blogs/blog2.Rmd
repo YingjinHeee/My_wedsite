@@ -8,7 +8,7 @@ draft: false
 image: pic07.jpg
 keywords: ""
 slug: aliquam
-title: My academic background- Where finance, data and strategy collide
+title: My academic background- Where finance, data and strategy embrace
 ---
 
 Intentionally cultivating my interdisciplinary application abilities, I decided to pursue my Masters in Analytics and Management degree at London Business School, adding more data and strategy knowledge reserve on my applied Statistics undergraduate study. I believe my diverse academic background and cross-industry professional experience equip me with better skills for the fast-changing and challenging society.
