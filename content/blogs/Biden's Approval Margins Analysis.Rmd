@@ -7,7 +7,7 @@ description: "Linear regresion and confident interval setup"
 draft: false
 image: pic10.jpg
 keywords: ""
-slug: ipsum
+slug: biden
 title: Biden's Approval Margins
 ---
 
